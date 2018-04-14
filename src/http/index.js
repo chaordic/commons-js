@@ -11,11 +11,11 @@
  * of the license agreement you entered into with Linx S.A.
  */
 
-import ajax from './ajax';
+import { ajax } from './ajax';
 
 /**
  * Http module.
  *
  * @module @linx/commons-js/http
  */
-export default { ajax };
+export { ajax };

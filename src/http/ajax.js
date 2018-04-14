@@ -30,7 +30,7 @@
  * @param {function} options.error A function to execute when some error
  *          occurs on request.
  */
-export default function ajax(options) {
+export function ajax(options) {
   const callback = (typeof options.callback === 'function') ?
     options.callback :
     () => { };
