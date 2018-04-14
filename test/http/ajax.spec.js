@@ -119,4 +119,83 @@ describe('http.ajax', function () {
       this.request.respond(200, {}, 'OK');
     },
   );
+
+  it('should pass params options on query', function (done) {
+    const baseUrl = 'http://www.google.com';
+    const fullUrl = 'http://www.google.com?q=query&user=user';
+
+    ajax({
+      url: baseUrl,
+      params: {
+        q: 'query',
+        user: 'user',
+      },
+      callback: () => {
+        expect(this.request.url).to.be.equal(fullUrl);
+        done();
+      },
+    });
+
+    this.request.respond(200, {}, 'OK');
+  });
+
+  it('should use "&" connector if url already have params', function (done) {
+    const baseUrl = 'http://www.google.com?test=2';
+    const fullUrl = 'http://www.google.com?test=2&q=query&user=user';
+
+    ajax({
+      url: baseUrl,
+      params: {
+        q: 'query',
+        user: 'user',
+      },
+      callback: () => {
+        expect(this.request.url).to.be.equal(fullUrl);
+        done();
+      },
+    });
+
+    this.request.respond(200, {}, 'OK');
+  });
+
+  it('should remove empty params', function (done) {
+    const baseUrl = 'http://www.google.com';
+    const fullUrl = 'http://www.google.com?q=query&user=user';
+
+    ajax({
+      url: baseUrl,
+      params: {
+        q: 'query',
+        user: 'user',
+        empty: undefined,
+        anotherEmpty: null,
+      },
+      callback: () => {
+        expect(this.request.url).to.be.equal(fullUrl);
+        done();
+      },
+    });
+
+    this.request.respond(200, {}, 'OK');
+  });
+
+  it('should serialize array params', function (done) {
+    const baseUrl = 'http://www.google.com';
+    const fullUrl =
+      'http://www.google.com?q[]=query&q[]=query2&q[]=query3&user=user';
+
+    ajax({
+      url: baseUrl,
+      params: {
+        q: ['query', 'query2', 'query3'],
+        user: 'user',
+      },
+      callback: () => {
+        expect(this.request.url).to.be.equal(fullUrl);
+        done();
+      },
+    });
+
+    this.request.respond(200, {}, 'OK');
+  });
 });
