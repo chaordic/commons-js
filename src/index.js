@@ -16,9 +16,7 @@ import http from './http';
 /**
  * @module @linx/commons-js
  */
-const commons = { http };
+export const commons = { http };
 
 window.top.linx = window.top.linx || {};
 window.top.linx.commons = commons;
-
-export default commons;

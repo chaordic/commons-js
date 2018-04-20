@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 import { expect } from 'chai';
 
-import ajax from '../../src/http/ajax';
+import { ajax } from '../../src/http/ajax';
 
 describe('http.ajax', function () {
   let fakeXhr;
