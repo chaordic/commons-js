@@ -9,7 +9,11 @@
     "import/prefer-default-export": 0,
     "prefer-arrow-callback": 0,
     "max-len": ["error", {
-      "code": 80
+      "code": 80,
+      "ignoreUrls": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreRegExpLiterals": true,
+      "ignoreStrings": true
     }]
   },
   "settings": {

@@ -5,12 +5,18 @@
   "main": "src/index.js",
   "browser": {
     "./http": "./src/http",
-    "./http/ajax": "./src/http/ajax"
+    "./http/ajax": "./src/http/ajax",
+    "./browser": "./src/browser",
+    "./browser/isMobile": "./src/browser/isMobile",
+    "./browser/getCookie": "./src/browser/getCookie",
+    "./browser/setCookie": "./src/browser/setCookie",
+    "./browser/deleteCookie": "./src/browser/deleteCookie"
   },
   "scripts": {
     "build": "gulp build",
     "test": "gulp test:ci",
-    "release": "standard-version"
+    "release": "standard-version",
+    "lint": "gulp lint"
   },
   "repository": {
     "type": "git",

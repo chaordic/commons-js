@@ -11,13 +11,14 @@
  * of the license agreement you entered into with Linx S.A.
  */
 
-import browser from './browser';
-import http from './http';
+import { getCookie } from './getCookie';
+import { isMobile } from './isMobile';
+import { setCookie } from './setCookie';
+import { deleteCookie } from './deleteCookie';
 
 /**
- * @module @linx/commons-js
+ * browser module.
+ *
+ * @module @linx/commons-js/browser
  */
-export const commons = { browser, http };
-
-window.top.linx = window.top.linx || {};
-window.top.linx.commons = commons;
+export { isMobile, getCookie, setCookie, deleteCookie };
