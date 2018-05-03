@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0"></a>
+# [3.2.0](https://git.neemu.com/frontend/frontend-lib-commons-js/compare/v3.1.0...v3.2.0) (2018-05-03)
+
+
+### Features
+
+* **browser:** add isInViewport function ([dfc1e55](https://git.neemu.com/frontend/frontend-lib-commons-js/commits/dfc1e55))
+* **browser:** add isMobile and cookie functions ([d8960fd](https://git.neemu.com/frontend/frontend-lib-commons-js/commits/d8960fd))
+* **http:** add params option to ajax function ([45fcf40](https://git.neemu.com/frontend/frontend-lib-commons-js/commits/45fcf40))
+
+
+
 <a name="3.1.0"></a>
 # 3.1.0 (2018-04-12)
 
