@@ -7,6 +7,7 @@
     "./http": "./src/http",
     "./http/ajax": "./src/http/ajax",
     "./browser": "./src/browser",
+    "./browser/isInViewport": "./src/browser/isInViewport",
     "./browser/isMobile": "./src/browser/isMobile",
     "./browser/getCookie": "./src/browser/getCookie",
     "./browser/setCookie": "./src/browser/setCookie",

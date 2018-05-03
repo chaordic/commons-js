@@ -12,6 +12,7 @@
  */
 
 import { getCookie } from './getCookie';
+import { isInViewport } from './isInViewport';
 import { isMobile } from './isMobile';
 import { setCookie } from './setCookie';
 import { deleteCookie } from './deleteCookie';
@@ -21,4 +22,4 @@ import { deleteCookie } from './deleteCookie';
  *
  * @module @linx/commons-js/browser
  */
-export { isMobile, getCookie, setCookie, deleteCookie };
+export { isInViewport, isMobile, getCookie, setCookie, deleteCookie };
