@@ -17,6 +17,6 @@ export function isMobile(options) {
 
   const ua = win.navigator.userAgent;
 
-  return regex.test(ua) ||
-    prefixRegex.test(ua.substr(0, 4));
+  return regex.test(ua)
+    || prefixRegex.test(ua.substr(0, 4));
 }
