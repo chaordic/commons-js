@@ -53,21 +53,21 @@ function serializeParams(params) {
  *          occurs on request.
  */
 export function ajax(options) {
-  const callback = (typeof options.callback === 'function') ?
-    options.callback :
-    () => { };
+  const callback = (typeof options.callback === 'function')
+    ? options.callback
+    : () => { };
 
   const requestData = (typeof options.data === 'object') ? options.data : {};
 
   const params = (typeof options.params === 'object') ? options.params : {};
 
   const requestMethod = (
-    options.type === undefined ||
-    (
-      options.type.toUpperCase() !== 'GET' &&
-      options.type.toUpperCase() !== 'POST' &&
-      options.type.toUpperCase() !== 'PUT' &&
-      options.type.toUpperCase() !== 'DELETE'
+    options.type === undefined
+    || (
+      options.type.toUpperCase() !== 'GET'
+      && options.type.toUpperCase() !== 'POST'
+      && options.type.toUpperCase() !== 'PUT'
+      && options.type.toUpperCase() !== 'DELETE'
     )
   ) ? 'GET' : options.type.toUpperCase();
 
@@ -87,17 +87,17 @@ export function ajax(options) {
       }
 
       if (xhr.status === 200) {
-        const success = (typeof options.success === 'function') ?
-          options.success :
-          () => { };
+        const success = (typeof options.success === 'function')
+          ? options.success
+          : () => { };
 
         // success callback execute only when the request have 200
         // status
         success(responseData);
       } else {
-        const error = (typeof options.error === 'function') ?
-          options.error :
-          () => { };
+        const error = (typeof options.error === 'function')
+          ? options.error
+          : () => { };
 
         // when a error occurs run the error callback
         error(responseData);
