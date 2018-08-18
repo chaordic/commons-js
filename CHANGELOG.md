@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.0"></a>
+# [3.3.0](https://github.com/chaordic/commons-js/compare/v3.2.2...v3.3.0) (2018-08-18)
+
+
+### Features
+
+* **http/ajax:** add timeout option ([7ad0099](https://github.com/chaordic/commons-js/commit/7ad0099))
+
+
+
 <a name="3.2.2"></a>
 ## [3.2.2](https://github.com/chaordic/commons-js/compare/v3.2.1...v3.2.2) (2018-08-14)
 
