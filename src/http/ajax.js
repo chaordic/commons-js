@@ -51,10 +51,22 @@ function serializeParams(params) {
  *          is successfully finished.
  * @param {function} options.error A function to execute when some error
  *          occurs on request.
+ * @param {number} [options.timeout] Specifies the number of milliseconds before
+ *          the request times out. If the request takes longer than `timeout`,
+ *          the request will be aborted. If not provided the request will wait
+ *          indefinitely.
  */
 export function ajax(options) {
   const callback = (typeof options.callback === 'function')
     ? options.callback
+    : () => { };
+
+  const success = (typeof options.success === 'function')
+    ? options.success
+    : () => { };
+
+  const error = (typeof options.error === 'function')
+    ? options.error
     : () => { };
 
   const requestData = (typeof options.data === 'object') ? options.data : {};
@@ -87,18 +99,10 @@ export function ajax(options) {
       }
 
       if (xhr.status === 200) {
-        const success = (typeof options.success === 'function')
-          ? options.success
-          : () => { };
-
         // success callback execute only when the request have 200
         // status
         success(responseData);
       } else {
-        const error = (typeof options.error === 'function')
-          ? options.error
-          : () => { };
-
         // when a error occurs run the error callback
         error(responseData);
       }
@@ -112,7 +116,16 @@ export function ajax(options) {
   const queryConnector = options.url.indexOf('?') >= 0 ? '&' : '?';
   const url = `${options.url}${queryConnector}${queryParams}`;
 
+  const { timeout = 0 } = options;
+
   xhr.open(requestMethod, url, true);
+
+  xhr.timeout = timeout;
+  xhr.ontimeout = (err) => {
+    callback(err);
+    error(err);
+  };
+
   if (requestMethod !== 'GET') {
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send(serializeParams(requestData));
