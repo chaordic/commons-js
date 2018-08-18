@@ -87,38 +87,40 @@ export function ajax(options) {
     return;
   }
 
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      let responseData;
-
-      try {
-        responseData = JSON.parse(xhr.responseText);
-      } catch (e) {
-        responseData = xhr.responseText;
-      }
-
-      if (xhr.status === 200) {
-        // success callback execute only when the request have 200
-        // status
-        success(responseData);
-      } else {
-        // when a error occurs run the error callback
-        error(responseData);
-      }
-
-      // always execute the callback
-      callback(responseData);
-    }
-  };
-
   const queryParams = serializeParams(params);
   const queryConnector = options.url.indexOf('?') >= 0 ? '&' : '?';
   const url = `${options.url}${queryConnector}${queryParams}`;
 
   const { timeout = 0 } = options;
 
+  const xhr = new XMLHttpRequest();
   xhr.open(requestMethod, url, true);
+
+  xhr.onload = (res) => {
+    const { status } = res.target;
+    let responseData;
+
+    try {
+      responseData = JSON.parse(xhr.response);
+    } catch (e) {
+      responseData = xhr.response;
+    }
+
+    if (status >= 200 && status < 300) {
+      callback(responseData);
+      success(responseData);
+    } else {
+      callback({ status, statusText: xhr.statusText });
+      error({ status, statusText: xhr.statusText });
+    }
+  };
+
+  xhr.onerror = (res) => {
+    const { status } = res.target;
+
+    callback({ status, statusText: xhr.statusText });
+    error({ status, statusText: xhr.statusText });
+  };
 
   xhr.timeout = timeout;
   xhr.ontimeout = (err) => {
