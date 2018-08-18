@@ -1,5 +1,4 @@
-import sinon from 'sinon';
-import { expect } from 'chai';
+import { expect, sinon } from '../globals';
 
 import { ajax } from '../../src/http/ajax';
 
@@ -37,6 +36,21 @@ describe('http.ajax', function () {
     });
 
     this.request.error();
+  });
+
+  it('should run the callback option when request times out', function () {
+    const clock = sinon.useFakeTimers();
+    const callbackStub = sinon.stub();
+
+    ajax({
+      url: 'http://www.google.com',
+      timeout: 500,
+      callback: callbackStub,
+    });
+
+    clock.tick(501);
+
+    expect(callbackStub).to.have.been.calledOnce;
   });
 
   it('should run the success option on successful responses', function (done) {
@@ -92,6 +106,21 @@ describe('http.ajax', function () {
     this.request.error();
   });
 
+  it('should not run the success option when request times out', function () {
+    const clock = sinon.useFakeTimers();
+    const successStub = sinon.stub();
+
+    ajax({
+      url: 'http://www.google.com',
+      timeout: 500,
+      success: successStub,
+    });
+
+    clock.tick(501);
+
+    expect(successStub).to.not.have.been.called;
+  });
+
   it('should run the error option on error responses', function (done) {
     ajax({
       url: 'http://www.google.com',
@@ -101,6 +130,21 @@ describe('http.ajax', function () {
     });
 
     this.request.error();
+  });
+
+  it('should run the error option when request times out', function () {
+    const clock = sinon.useFakeTimers();
+    const errorStub = sinon.stub();
+
+    ajax({
+      url: 'http://www.google.com',
+      timeout: 500,
+      error: errorStub,
+    });
+
+    clock.tick(501);
+
+    expect(errorStub).to.have.been.calledOnce;
   });
 
   it(
