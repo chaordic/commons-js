@@ -4,6 +4,9 @@
   "description": "A library with common function implementations for Javascript Applications.",
   "main": "src/index.js",
   "browser": {
+    "./query-string": "./src/query-string",
+    "./query-string/parse": "./src/query-string/parse",
+    "./query-string/stringify": "./src/query-string/stringify",
     "./http": "./src/http",
     "./http/ajax": "./src/http/ajax",
     "./browser": "./src/browser",
