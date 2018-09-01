@@ -23,7 +23,7 @@ A library with common function implementations for Javascript Applications.
 
 ### With Webpack
 
-If your application uses some module bundler, you can import the whole Commons-js library, a single module, or just a single function, making your source code smaller because only the features you need will be concatened to your build application.
+If your application uses some module bundler, you can import the whole Commons-js library, a single module, or just a single function, making your source code smaller because only the features you need will be concatened to your built application.
 
 The examples below were tested using Webpack, if you use another module bundler things might not work as well as expected.
 
@@ -61,54 +61,6 @@ Import just the `ajax` function. Only the implementation of this function will b
 
 ```javascript
 import { ajax } from '@linx/commons-js/http/ajax';
-
-// make an ajax request
-ajax({
-  url: 'http://www.google.com',
-  callback: () => {
-    console.log('OK');
-  }
-});
-```
-
-#### CommonJS Modules
-
-The Commons always exports the main module/function as default export of a file, so if your application uses `CommonJS` syntax, you can require the default module of each file.
-
-Examples:
-
-Require the whole library and use it on your app:
-
-```javascript
-const commons = require('@linx/commons-js');
-
-// make an ajax request
-commons.http.ajax({
-  url: 'http://www.google.com',
-  callback: () => {
-    console.log('OK');
-  }
-});
-```
-
-Require just the `Http` module. Only the implementation of this module functions will be bundled to your application source code.
-
-```javascript
-const http = require('@linx/commons-js/http');
-
-// make an ajax request
-http.ajax({
-  url: 'http://www.google.com',
-  callback: () => {
-    console.log('OK');
-  }
-});
-```
-
-Require just the `ajax` function. Only the implementation of this function will be bundled to your application source code.
-
-```javascript
-const ajax = require('@linx/commons-js/http/ajax');
 
 // make an ajax request
 ajax({
