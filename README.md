@@ -19,7 +19,48 @@
 
 A library with common function implementations for Javascript Applications.
 
+## Installation
+
+### CDN
+```html
+<script src="https://cdn.jsdelivr.net/npm/@linx-impulse/commons-js/dist/commons.min.js"></script>
+```
+
+### npm
+
+```sh
+npm install -s @linx-impulse/commons-js
+```
+
 ## Usage
+
+### Global object
+
+The built file inside `dist` directory have the whole library modules and functions. If you use it from CDN or from your `node_modules` a global object will be created inside `linx` namespace allowing you to use the functions.
+
+Example:
+
+```html
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@linx-impulse/commons-js/dist/commons.min.js"></script>
+  </head>
+  <body>
+    <script>
+      // make an ajax request and save the response inside a cookie
+      linx.commons.http.ajax({
+        url: '//api.example.com',
+        params: {
+          id: 'someId',
+        },
+        success: (data) => {
+          linx.commons.browser.setCookie('myData', JSON.stringify(data));
+        },
+      });
+    </script>
+  </body>
+</html>
+```
 
 ### With Webpack
 
