@@ -19,6 +19,10 @@
     "release": "standard-version",
     "lint": "gulp lint"
   },
+  "files": [
+    "src",
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/chaordic/commons-js"
