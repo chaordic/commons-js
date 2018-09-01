@@ -1,4 +1,21 @@
-# Linx Commons-js [![CircleCI](https://circleci.com/gh/chaordic/commons-js.svg?style=svg&circle-token=4e1b37eea33f5e0f790268381b7883bb73972356)](https://circleci.com/gh/chaordic/commons-js)
+# Linx Commons-js
+
+[![Version][version-img]][package-url] [![CircleCI][circleci-img]][circleci-url] [![Dependencies][david-img]][david-url] [![Dev Dependencies][david-dev-img]][david-dev-url] [![License][license-img]][license-url] [![Downloads][downloads-img]][downloads-url] [![jsDelivr Hits][jsdelivr-img]][jsdelivr-url]
+
+[circleci-img]: https://circleci.com/gh/chaordic/commons-js.svg?style=shield
+[circleci-url]: https://circleci.com/gh/chaordic/commons-js
+[david-img]: https://img.shields.io/david/chaordic/commons-js.svg
+[david-url]: https://david-dm.org/chaordic/commons-js
+[david-dev-img]: https://img.shields.io/david/dev/chaordic/commons-js.svg
+[david-dev-url]: https://david-dm.org/chaordic/commons-js?type=dev
+[version-img]: https://img.shields.io/npm/v/@linx-impulse/commons-js.svg?style=flat-square
+[package-url]: https://npmjs.org/package/@linx-impulse/commons-js
+[license-img]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
+[license-url]: LICENSE.txt
+[downloads-img]: https://img.shields.io/npm/dm/@linx-impulse/commons-js.svg?style=flat-square
+[downloads-url]: http://npm-stat.com/charts.html?package=@linx-impulse/commons-js
+[jsdelivr-img]: https://data.jsdelivr.com/v1/package/npm/@linx-impulse/commons-js/badge
+[jsdelivr-url]: https://www.jsdelivr.com/package/npm/@linx-impulse/commons-js
 
 A library with common function implementations for Javascript Applications.
 
