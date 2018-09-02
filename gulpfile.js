@@ -21,13 +21,7 @@ gulp.task('lint', cb => pump([
 ], cb));
 
 gulp.task('js', cb => pump([
-  gulpWebpack(
-    Object.assign(
-      webpackConfig,
-      { mode: 'development' },
-    ),
-    webpack,
-  ),
+  gulpWebpack(webpackConfig, webpack),
   gulp.dest('./dist'),
 ], cb));
 
