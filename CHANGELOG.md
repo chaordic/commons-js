@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.4.0"></a>
+# [3.4.0](https://github.com/chaordic/commons-js/compare/v3.3.0...v3.4.0) (2018-09-04)
+
+
+### Features
+
+* **query-string:** add functions to parse and stringfy url parameters ([c0157fc](https://github.com/chaordic/commons-js/commit/c0157fc))
+
+
+
 <a name="3.3.0"></a>
 # [3.3.0](https://github.com/chaordic/commons-js/compare/v3.2.2...v3.3.0) (2018-08-18)
 
