@@ -11,13 +11,13 @@
  * of the license agreement you entered into with Linx S.A.
  */
 
-import browser from './browser';
-import http from './http';
-import queryString from './query-string';
-/**
- * @module @linx/commons-js
- */
-export const commons = { browser, http, queryString };
+import { parse } from './parse';
+import { stringify } from './stringify';
 
-window.top.linx = window.top.linx || {};
-window.top.linx.commons = commons;
+
+/**
+ * browser module.
+ *
+ * @module @linx/commons-js/query-string
+ */
+export { parse, stringify };
