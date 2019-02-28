@@ -11,23 +11,12 @@
  * of the license agreement you entered into with Linx S.A.
  */
 
-import { getCookie } from './getCookie';
-import { isInViewport } from './isInViewport';
-import { isMobile } from './isMobile';
-import { setCookie } from './setCookie';
-import { deleteCookie } from './deleteCookie';
-import { stopPropagation } from './stopPropagation';
+import { loadFile } from './loadFile';
+import { objectMergeRecursive } from './objectMergeRecursive';
 
 /**
  * browser module.
  *
- * @module @linx/commons-js/browser
+ * @module @linx/commons-js/util
  */
-export {
-  isInViewport,
-  isMobile,
-  getCookie,
-  setCookie,
-  deleteCookie,
-  stopPropagation,
-};
+export { loadFile, objectMergeRecursive };

@@ -14,10 +14,12 @@
 import browser from './browser';
 import http from './http';
 import queryString from './query-string';
+import util from './util';
+
 /**
  * @module @linx/commons-js
  */
-export const commons = { browser, http, queryString };
+export const commons = { browser, http, queryString, util };
 
 window.top.linx = window.top.linx || {};
 window.top.linx.commons = commons;
