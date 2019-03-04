@@ -1,4 +1,18 @@
-export function loadFile(source, callback) {
+/**
+ * Creates and appends an element that links the HTML document to a given file
+ * source and sets a callback function to be called once the element finishes
+ * loading.
+ *
+ * @memberof module:@linx/commons-js/util
+ * @method loadFile
+ * @param {string} source The path to the file that will be loaded.
+ * @param {function} callback The function to be called once the
+ * element created finishes loading.
+ * @param {object} document The document object to be used,
+ * defaults to Window.document.
+ * @returns {object} The element that was created and appended.
+ */
+export function loadFile(source, callback, document = window.document) {
   let file;
 
   if (source.includes('.js')) {
@@ -8,14 +22,15 @@ export function loadFile(source, callback) {
     file.setAttribute('src', source);
   } else if (source.includes('.css')) {
     file = document.createElement('link');
-    file.setAttribute('rel', 'stylesheet');
     file.setAttribute('type', 'text/css');
+    file.setAttribute('rel', 'stylesheet');
     file.setAttribute('href', source);
   }
 
   // Append in the HEAD element
   if (file) {
-    document.getElementsByTagName('head')[0].appendChild(file);
+    const [head] = document.getElementsByTagName('head');
+    head.appendChild(file);
 
     if (file.readyState) {
       file.onreadystatechange = () => {
