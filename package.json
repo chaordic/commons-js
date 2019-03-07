@@ -14,7 +14,11 @@
     "./browser/isMobile": "./src/browser/isMobile",
     "./browser/getCookie": "./src/browser/getCookie",
     "./browser/setCookie": "./src/browser/setCookie",
-    "./browser/deleteCookie": "./src/browser/deleteCookie"
+    "./browser/deleteCookie": "./src/browser/deleteCookie",
+    "./browser/stopPropagation": "./src/browser/stopPropagation",
+    "./util": "./src/util",
+    "./util/loadFile": "./src/util/loadFile",
+    "./util/objectMergeRecursive": "./src/util/objectMergeRecursive"
   },
   "scripts": {
     "build": "gulp build",
