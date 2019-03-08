@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.5.0"></a>
+# [3.5.0](https://github.com/chaordic/commons-js/compare/v3.4.0...v3.5.0) (2019-03-08)
+
+
+### Features
+
+* added loadFile, objectMergeRecursive and stopPropagation ([8ea08ce](https://github.com/chaordic/commons-js/commit/8ea08ce))
+
+
+
 <a name="3.4.0"></a>
 # [3.4.0](https://github.com/chaordic/commons-js/compare/v3.3.0...v3.4.0) (2018-09-04)
 
