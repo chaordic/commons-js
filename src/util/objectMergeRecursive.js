@@ -10,22 +10,24 @@
  * given.
  */
 export function objectMergeRecursive(...args) {
-  let target;
+  let [target] = args;
 
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < args.length; i++) {
+  for (let i = 1; i < args.length; i++) {
     const source = args[i];
 
     if (Array.isArray(source)) {
       target = (target || []).concat(source);
-    } else if (typeof source === 'object') {
+    } else {
       if (Array.isArray(target) || target === undefined) {
         target = {};
       }
 
       // eslint-disable-next-line no-loop-func
       Object.keys(source).forEach((key) => {
-        if (source[key] !== undefined) {
+        if (typeof target[key] === 'object' && typeof source[key] === 'object') {
+          target[key] = objectMergeRecursive(target[key], source[key]);
+        } else if (source[key] !== undefined) {
           target[key] = source[key];
         }
       });
