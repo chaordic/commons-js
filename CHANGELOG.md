@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/chaordic/commons-js/compare/v3.4.0...v4.0.0) (2019-05-03)
+
+
+### Features
+
+* added loadFile, objectMergeRecursive and stopPropagation ([8ea08ce](https://github.com/chaordic/commons-js/commit/8ea08ce))
+
+
+* Merge pull request #12 from chaordic/breaking-change-merge-now-mutates-object ([be63b9e](https://github.com/chaordic/commons-js/commit/be63b9e)), closes [#12](https://github.com/chaordic/commons-js/issues/12)
+
+
+### BREAKING CHANGES
+
+* merge now mutates object
+
+
+
 <a name="3.5.0"></a>
 # [3.5.0](https://github.com/chaordic/commons-js/compare/v3.4.0...v3.5.0) (2019-03-08)
 
