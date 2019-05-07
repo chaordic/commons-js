@@ -16,21 +16,23 @@ export function objectMergeRecursive(...args) {
   for (let i = 1; i < args.length; i++) {
     const source = args[i];
 
-    if (Array.isArray(source)) {
-      target = source;
-    } else {
-      if (Array.isArray(target) || target === undefined) {
-        target = {};
-      }
-
-      // eslint-disable-next-line no-loop-func
-      Object.keys(source).forEach((key) => {
-        if (typeof target[key] === 'object' && typeof source[key] === 'object') {
-          target[key] = objectMergeRecursive(target[key], source[key]);
-        } else if (source[key] !== undefined) {
-          target[key] = source[key];
+    if (source) {
+      if (Array.isArray(source)) {
+        target = source;
+      } else {
+        if (Array.isArray(target) || target === undefined) {
+          target = {};
         }
-      });
+
+        // eslint-disable-next-line no-loop-func
+        Object.keys(source).forEach((key) => {
+          if (typeof target[key] === 'object' && typeof source[key] === 'object') {
+            target[key] = objectMergeRecursive(target[key], source[key]);
+          } else if (source[key] !== undefined) {
+            target[key] = source[key];
+          }
+        });
+      }
     }
   }
 

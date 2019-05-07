@@ -79,4 +79,21 @@ describe('objectMergeRecursive', function() {
     expect(result).to.deep.equal(expectedObj);
   });
 
+  it('should not break when receiving undefined or null parameters', function() {
+    const mockObj1 = { a: 1 };
+    const mockObj2 = { a: { b: 2 } };
+
+    let result = objectMergeRecursive(mockObj1);
+    expect(result).to.deep.equal(mockObj1);
+
+    result = objectMergeRecursive(mockObj1, undefined);
+    expect(result).to.deep.equal(mockObj1);
+
+    result = objectMergeRecursive(undefined, mockObj1);
+    expect(result).to.deep.equal(mockObj1);
+
+    result = objectMergeRecursive(mockObj1, undefined, mockObj2);
+    expect(result).to.deep.equal(mockObj2);
+  });
+
 });
