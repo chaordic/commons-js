@@ -17,7 +17,7 @@ export function objectMergeRecursive(...args) {
     const source = args[i];
 
     if (Array.isArray(source)) {
-      target = (target || []).concat(source);
+      target = source;
     } else {
       if (Array.isArray(target) || target === undefined) {
         target = {};
