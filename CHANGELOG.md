@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/chaordic/commons-js/compare/v4.0.0...v4.0.1) (2019-05-16)
+
+
+### Bug Fixes
+
+* fixed merge breaking with undefined params ([8e6324e](https://github.com/chaordic/commons-js/commit/8e6324e))
+* merge ignores parameters that not objects ([0467170](https://github.com/chaordic/commons-js/commit/0467170))
+* merge no longer concats arrays ([b3ff75f](https://github.com/chaordic/commons-js/commit/b3ff75f))
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/chaordic/commons-js/compare/v3.4.0...v4.0.0) (2019-05-03)
 
