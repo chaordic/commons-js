@@ -37,28 +37,36 @@ describe('objectMergeRecursive', function() {
     expect(objectMergeRecursive(mockObj1, mockObj2, mockObj3)).to.deep.equal(expectedObj);
   });
 
-  it('should concat parameters that are both arrays', function() {
-    const mockObj1 = [1,2,3];
-    const mockObj2 = [4,5,6];
-    const expectedObj1 = [1,2,3,4,5,6];
-
-    const mockObj3 = { a: [1, 2], b: 1 };
-    const mockObj4 = { a: [3, 4], b: 3 };
-    const expectedObj2 = { a: [1, 2, 3, 4], b: 3}
-
-    expect(objectMergeRecursive(mockObj1, mockObj2)).to.deep.equal(expectedObj1);
-    expect(objectMergeRecursive(mockObj3, mockObj4)).to.deep.equal(expectedObj2);
-  });
-
-  it('should overwrite array parameter if the next is an object', function() {
-    const mockObj1 = [1];
-    const mockObj2 = { a: 0 };
-    const expectedObj = { a: 0 };
+  it('should overwrite array properties', function() {
+    const mockObj1 = { a: [1, 2], b: 1 };
+    const mockObj2 = { a: [3, 4], b: 3 };
+    const expectedObj = { a: [3, 4], b: 3}
 
     expect(objectMergeRecursive(mockObj1, mockObj2)).to.deep.equal(expectedObj);
   });
 
-  it ('should mutate the first parameter with the result if that parameter is an object', function() {
+  it('should ignore parameters that aren\'t objects', function() {
+    const mockObj1 = 1;
+    const mockObj2 = { a: 0 };
+    let expectedObj = { a: 0 };
+
+    expect(objectMergeRecursive(mockObj1, mockObj2)).to.deep.equal(expectedObj);
+
+    const mockObj3 = 12;
+    const mockObj4 = [3,4];
+    expectedObj = {};
+
+    expect(objectMergeRecursive(mockObj3, mockObj4)).to.deep.equal({});
+
+    const mockObj5 = { a: 1 };
+    const mockObj6 = [1, 2, 3];
+    const mockObj7 = { b: 2 };
+    expectedObj = { a: 1, b: 2 };
+
+    expect(objectMergeRecursive(expectedObj)).to.deep.equal(expectedObj);
+  });
+
+  it('should mutate the first parameter with the result', function() {
     const mockObj1 = { a: 1, b: 2 };
     const mockObj2 = { c: 5, d: 6 };
     const expectedObj = { a: 1, b: 2, c: 5, d: 6 };
@@ -69,15 +77,20 @@ describe('objectMergeRecursive', function() {
     expect(result).to.deep.equal(expectedObj);
   });
 
-  it ('should not mutate the first parameter with the result if that parameter is an array', function() {
-    const mockObj1 = [1];
-    const mockObj2 = { a: 0 };
-    const expectedObj = { a: 0 };
+  it('should not break when receiving undefined or null parameters', function() {
+    const mockObj1 = { a: 1 };
+    const mockObj2 = { a: { b: 2 } };
 
-    const result = objectMergeRecursive(mockObj1, mockObj2);
+    let result = objectMergeRecursive(mockObj1);
+    expect(result).to.deep.equal(mockObj1);
 
-    expect(result).to.not.equal(mockObj1);
-    expect(result).to.deep.equal(expectedObj);
+    result = objectMergeRecursive(mockObj1, undefined);
+    expect(result).to.deep.equal(mockObj1);
+
+    result = objectMergeRecursive(undefined, mockObj1);
+    expect(result).to.deep.equal(mockObj1);
+
+    result = objectMergeRecursive(mockObj1, undefined, mockObj2);
+    expect(result).to.deep.equal(mockObj2);
   });
-
 });
