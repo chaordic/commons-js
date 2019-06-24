@@ -15,12 +15,12 @@
 export function loadFile(source, callback, document = window.document) {
   let file;
 
-  if (source.includes('.js')) {
+  if (source.indexOf('.js') !== -1) {
     file = document.createElement('script');
     file.setAttribute('type', 'text/javascript');
     file.setAttribute('async', 'true');
     file.setAttribute('src', source);
-  } else if (source.includes('.css')) {
+  } else if (source.indexOf('.css') !== -1) {
     file = document.createElement('link');
     file.setAttribute('type', 'text/css');
     file.setAttribute('rel', 'stylesheet');
