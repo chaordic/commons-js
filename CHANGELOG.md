@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.2"></a>
+## [4.0.2](https://github.com/chaordic/commons-js/compare/v4.0.1...v4.0.2) (2019-06-28)
+
+
+### Bug Fixes
+
+* replaced .includes with .indexOf ([76dd489](https://github.com/chaordic/commons-js/commit/76dd489))
+
+
+
 <a name="4.0.1"></a>
 ## [4.0.1](https://github.com/chaordic/commons-js/compare/v4.0.0...v4.0.1) (2019-05-16)
 
