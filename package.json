@@ -26,6 +26,10 @@
     "release": "standard-version",
     "lint": "gulp lint"
   },
+  "files": [
+    "src",
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/chaordic/commons-js"
@@ -71,6 +75,7 @@
     "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0",
     "standard-version": "^4.4.0",
+    "uglifyjs-webpack-plugin": "^1.3.0",
     "webpack": "^4.16.5",
     "webpack-stream": "^5.1.1"
   }

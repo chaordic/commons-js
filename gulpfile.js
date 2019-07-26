@@ -14,20 +14,18 @@ gulp.task('clean', cb => pump([
 ], cb));
 
 gulp.task('lint', cb => pump([
-  gulp.src(['./src/**/*.js']),
+  gulp.src([
+    './src/**/*.js',
+    './test/**/*.js',
+    '*.js',
+  ]),
   $.eslint(),
   $.eslint.format(),
   $.eslint.failAfterError(),
 ], cb));
 
 gulp.task('js', cb => pump([
-  gulpWebpack(
-    Object.assign(
-      webpackConfig,
-      { mode: 'development' },
-    ),
-    webpack,
-  ),
+  gulpWebpack(webpackConfig, webpack),
   gulp.dest('./dist'),
 ], cb));
 

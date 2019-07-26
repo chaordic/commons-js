@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb",
+  "extends": "airbnb-base",
   "env": {
     "browser": true,
     "mocha": true
@@ -8,6 +8,7 @@
     "func-names": 0,
     "import/prefer-default-export": 0,
     "prefer-arrow-callback": 0,
+    "no-unused-expressions": 0,
     "max-len": ["error", {
       "code": 80,
       "ignoreUrls": true,

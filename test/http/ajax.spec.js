@@ -225,8 +225,7 @@ describe('http.ajax', function () {
 
   it('should serialize array params', function (done) {
     const baseUrl = 'http://www.google.com';
-    const fullUrl =
-      'http://www.google.com?q[]=query&q[]=query2&q[]=query3&user=user';
+    const fullUrl = 'http://www.google.com?q[]=query&q[]=query2&q[]=query3&user=user';
 
     ajax({
       url: baseUrl,

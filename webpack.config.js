@@ -1,10 +1,14 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 module.exports = {
+  mode: 'production',
   devtool: 'source-map',
-  entry: [
-    './src/index.js',
-  ],
+  entry: {
+    'commons.js': './src/index.js',
+    'commons.min.js': './src/index.js',
+  },
   output: {
-    filename: 'commons.js',
+    filename: '[name]',
   },
   module: {
     rules: [
@@ -13,6 +17,13 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        test: /\.min\.js$/,
+      }),
     ],
   },
 };
