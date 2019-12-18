@@ -17,6 +17,7 @@
     "./browser/deleteCookie": "./src/browser/deleteCookie",
     "./browser/stopPropagation": "./src/browser/stopPropagation",
     "./util": "./src/util",
+    "./util/formatCurrency": "./src/util/formatCurrency",
     "./util/loadFile": "./src/util/loadFile",
     "./util/objectMergeRecursive": "./src/util/objectMergeRecursive"
   },
