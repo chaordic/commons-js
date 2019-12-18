@@ -3,7 +3,7 @@
 /**
  * Set a cookie on the browser
  *
- * @memberof module:@linx/commons-js/browser
+ * @memberof module:@linx-impulse/commons-js/browser
  * @method setCookie
  * @param {string} name The name of the cookie
  * @param {string} value The value to set.

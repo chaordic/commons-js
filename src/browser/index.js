@@ -21,7 +21,7 @@ import { stopPropagation } from './stopPropagation';
 /**
  * browser module.
  *
- * @module @linx/commons-js/browser
+ * @module @linx-impulse/commons-js/browser
  */
 export {
   isInViewport,

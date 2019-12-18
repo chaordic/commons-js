@@ -17,6 +17,6 @@ import { objectMergeRecursive } from './objectMergeRecursive';
 /**
  * browser module.
  *
- * @module @linx/commons-js/util
+ * @module @linx-impulse/commons-js/util
  */
 export { loadFile, objectMergeRecursive };

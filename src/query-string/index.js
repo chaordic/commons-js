@@ -18,6 +18,6 @@ import { stringify } from './stringify';
 /**
  * browser module.
  *
- * @module @linx/commons-js/query-string
+ * @module @linx-impulse/commons-js/query-string
  */
 export { parse, stringify };

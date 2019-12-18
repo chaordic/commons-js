@@ -3,7 +3,7 @@ const pastDate = 'expires=Thu, 01 Jan 1970 00:00:01 GMT';
 /**
  * Deletes a page cookie.
  *
- * @memberof module:@linx/commons-js/browser
+ * @memberof module:@linx-impulse/commons-js/browser
  * @method deleteCookie
  * @param {string} name The cookie name.
  * @param {object} options A key value pair set with method settings.

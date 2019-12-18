@@ -8,7 +8,7 @@ function arrayToQueryParams(key, values) {
  * From an object with the url parameters concatenate
  * all in one string
  *
- * @memberof module:@linx/commons-js/query-string
+ * @memberof module:@linx-impulse/commons-js/query-string
  * @method stringify
  * @param {object} params The object to be transformed in string
  * @returns {string} The object parameters in the url format

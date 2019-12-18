@@ -35,7 +35,7 @@ function serializeParams(params) {
 /**
  * Default ajax request.
  *
- * @memberof module:@linx/commons-js/http
+ * @memberof module:@linx-impulse/commons-js/http
  * @method ajax
  * @param {object} options A set of key/value pairs that configure
  *          the Ajax request.

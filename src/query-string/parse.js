@@ -17,7 +17,7 @@ function addToObj(parameters, key, value) {
  * Parse a query string and return the object with
  * the parameters and values
  *
- * @memberof module:@linx/commons-js/query-string
+ * @memberof module:@linx-impulse/commons-js/query-string
  * @method parse
  * @param {string} query The query to be parsed
  * @returns {object} parameters The object to be returned with the parameters

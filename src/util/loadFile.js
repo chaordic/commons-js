@@ -3,7 +3,7 @@
  * source and sets a callback function to be called once the element finishes
  * loading.
  *
- * @memberof module:@linx/commons-js/util
+ * @memberof module:@linx-impulse/commons-js/util
  * @method loadFile
  * @param {string} source The path to the file that will be loaded.
  * @param {function} callback The function to be called once the

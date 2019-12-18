@@ -3,7 +3,7 @@
  * the properties from right to left in case of conflicts and ignores parameters
  * (but not properties) that are not objects.
  *
- * @memberof module:@linx/commons-js/util
+ * @memberof module:@linx-impulse/commons-js/util
  * @method objectMergeRecursive
  * @param {...object} source An object to be merged
  * @returns {object} An object containing merged properties of all valid sources
