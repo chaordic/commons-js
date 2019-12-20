@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/chaordic/commons-js/compare/v4.0.2...v4.1.0) (2019-12-20)
+
+
+### Bug Fixes
+
+* update npm scope ([97b82c0](https://github.com/chaordic/commons-js/commit/97b82c0))
+
+
+### Features
+
+* formatCurrency function ([f335e5d](https://github.com/chaordic/commons-js/commit/f335e5d))
+
+
+
 <a name="4.0.2"></a>
 ## [4.0.2](https://github.com/chaordic/commons-js/compare/v4.0.1...v4.0.2) (2019-06-28)
 
