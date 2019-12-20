@@ -15,7 +15,7 @@ The examples below were tested using Webpack, if you use another module bundler 
 Import the whole library and use it on your app:
 
 ```javascript
-import { commons } from '@linx/commons-js';
+import { commons } from '@linx-impulse/commons-js';
 
 // make an ajax request
 commons.http.ajax({
@@ -29,7 +29,7 @@ commons.http.ajax({
 Import just the `Http` module. Only the implementation of this module functions will be bundled to your application source code.
 
 ```javascript
-import { http } from '@linx/commons-js/http';
+import { http } from '@linx-impulse/commons-js/http';
 
 // make an ajax request
 http.ajax({
@@ -43,7 +43,7 @@ http.ajax({
 Import just the `ajax` function. Only the implementation of this function will be bundled to your application source code.
 
 ```javascript
-import { ajax } from '@linx/commons-js/http/ajax';
+import { ajax } from '@linx-impulse/commons-js/http/ajax';
 
 // make an ajax request
 ajax({
@@ -63,7 +63,7 @@ Examples:
 Require the whole library and use it on your app:
 
 ```javascript
-const commons = require('@linx/commons-js');
+const commons = require('@linx-impulse/commons-js');
 
 // make an ajax request
 commons.http.ajax({
@@ -77,7 +77,7 @@ commons.http.ajax({
 Require just the `Http` module. Only the implementation of this module functions will be bundled to your application source code.
 
 ```javascript
-const http = require('@linx/commons-js/http');
+const http = require('@linx-impulse/commons-js/http');
 
 // make an ajax request
 http.ajax({
@@ -91,7 +91,7 @@ http.ajax({
 Require just the `ajax` function. Only the implementation of this function will be bundled to your application source code.
 
 ```javascript
-const ajax = require('@linx/commons-js/http/ajax');
+const ajax = require('@linx-impulse/commons-js/http/ajax');
 
 // make an ajax request
 ajax({

@@ -13,10 +13,11 @@
 
 import { loadFile } from './loadFile';
 import { objectMergeRecursive } from './objectMergeRecursive';
+import { formatCurrency } from './formatCurrency';
 
 /**
  * browser module.
  *
- * @module @linx/commons-js/util
+ * @module @linx-impulse/commons-js/util
  */
-export { loadFile, objectMergeRecursive };
+export { loadFile, objectMergeRecursive, formatCurrency };

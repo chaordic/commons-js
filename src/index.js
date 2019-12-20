@@ -17,7 +17,7 @@ import queryString from './query-string';
 import util from './util';
 
 /**
- * @module @linx/commons-js
+ * @module @linx-impulse/commons-js
  */
 export const commons = { browser, http, queryString, util };
 

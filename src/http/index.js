@@ -16,6 +16,6 @@ import { ajax } from './ajax';
 /**
  * Http module.
  *
- * @module @linx/commons-js/http
+ * @module @linx-impulse/commons-js/http
  */
 export { ajax };

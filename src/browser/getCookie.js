@@ -3,7 +3,7 @@
 /**
  * Returns a cookie value by its name
  *
- * @memberof module:@linx/commons-js/browser
+ * @memberof module:@linx-impulse/commons-js/browser
  * @method getCookie
  * @param {string} name The name of cookie to get
  * @param {object} options A list of key-value pair options.

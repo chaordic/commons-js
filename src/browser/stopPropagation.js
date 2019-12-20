@@ -2,7 +2,7 @@
  * Calls functions to prevent further propagation
  * of a given event in the capturing and bubbling phases.
  *
- * @memberof module:@linx/commons-js/browser
+ * @memberof module:@linx-impulse/commons-js/browser
  * @method stopPropagation
  * @param {object} event The event whose functions will be called
  */
