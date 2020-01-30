@@ -13,6 +13,7 @@
 
 import { loadFile } from './loadFile';
 import { objectMergeRecursive } from './objectMergeRecursive';
+import { formatCategories } from './formatCategories';
 import { formatCurrency } from './formatCurrency';
 
 /**
@@ -20,4 +21,9 @@ import { formatCurrency } from './formatCurrency';
  *
  * @module @linx-impulse/commons-js/util
  */
-export { loadFile, objectMergeRecursive, formatCurrency };
+export {
+  loadFile,
+  objectMergeRecursive,
+  formatCategories,
+  formatCurrency
+};
