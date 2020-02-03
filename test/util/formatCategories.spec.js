@@ -1,7 +1,7 @@
 import { expect, sinon } from '../globals';
 import { formatCategories } from '../../src/util/formatCategories';
 
-describe.only('util/formatCategories', function() {
+describe('util/formatCategories', function() {
   it('should return an array of category ids', function () {
     const mockCategories = [
       { id: 'cat-01', name: 'category-01' },
