@@ -25,5 +25,5 @@ export {
   loadFile,
   objectMergeRecursive,
   formatCategories,
-  formatCurrency
+  formatCurrency,
 };

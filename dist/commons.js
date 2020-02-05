@@ -36,17 +36,32 @@
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
 /******/ 		}
 /******/ 	};
 /******/
 /******/ 	// define __esModule on exports
 /******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
 /******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -90,7 +105,7 @@ var pastDate = 'expires=Thu, 01 Jan 1970 00:00:01 GMT';
 /**
  * Deletes a page cookie.
  *
- * @memberof module:@linx/commons-js/browser
+ * @memberof module:@linx-impulse/commons-js/browser
  * @method deleteCookie
  * @param {string} name The cookie name.
  * @param {object} options A key value pair set with method settings.
@@ -139,7 +154,7 @@ exports.getCookie = getCookie;
 /**
  * Returns a cookie value by its name
  *
- * @memberof module:@linx/commons-js/browser
+ * @memberof module:@linx-impulse/commons-js/browser
  * @method getCookie
  * @param {string} name The name of cookie to get
  * @param {object} options A list of key-value pair options.
@@ -177,7 +192,7 @@ function getCookie(name, options) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteCookie = exports.setCookie = exports.getCookie = exports.isMobile = exports.isInViewport = undefined;
+exports.stopPropagation = exports.deleteCookie = exports.setCookie = exports.getCookie = exports.isMobile = exports.isInViewport = undefined;
 
 var _getCookie = __webpack_require__(/*! ./getCookie */ "./src/browser/getCookie.js");
 
@@ -189,27 +204,32 @@ var _setCookie = __webpack_require__(/*! ./setCookie */ "./src/browser/setCookie
 
 var _deleteCookie = __webpack_require__(/*! ./deleteCookie */ "./src/browser/deleteCookie.js");
 
+var _stopPropagation = __webpack_require__(/*! ./stopPropagation */ "./src/browser/stopPropagation.js");
+
 /**
  * browser module.
  *
- * @module @linx/commons-js/browser
+ * @module @linx-impulse/commons-js/browser
  */
+/*
+ * Linx commons-js.
+ *
+ * A library with common functions implementations for javascript applications.
+ *
+ * Copyright (c) 2018 - Linx S.A
+ *
+ * LICENSE: This software is the confidential and proprietary information of
+ * Linx S.A ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the terms
+ * of the license agreement you entered into with Linx S.A.
+ */
+
 exports.isInViewport = _isInViewport.isInViewport;
 exports.isMobile = _isMobile.isMobile;
 exports.getCookie = _getCookie.getCookie;
 exports.setCookie = _setCookie.setCookie;
-exports.deleteCookie = _deleteCookie.deleteCookie; /*
-                                                    * Linx commons-js.
-                                                    *
-                                                    * A library with common functions implementations for javascript applications.
-                                                    *
-                                                    * Copyright (c) 2018 - Linx S.A
-                                                    *
-                                                    * LICENSE: This software is the confidential and proprietary information of
-                                                    * Linx S.A ("Confidential Information"). You shall not disclose such
-                                                    * Confidential Information and shall use it only in accordance with the terms
-                                                    * of the license agreement you entered into with Linx S.A.
-                                                    */
+exports.deleteCookie = _deleteCookie.deleteCookie;
+exports.stopPropagation = _stopPropagation.stopPropagation;
 
 /***/ }),
 
@@ -296,7 +316,7 @@ exports.setCookie = setCookie;
 /**
  * Set a cookie on the browser
  *
- * @memberof module:@linx/commons-js/browser
+ * @memberof module:@linx-impulse/commons-js/browser
  * @method setCookie
  * @param {string} name The name of the cookie
  * @param {string} value The value to set.
@@ -354,6 +374,43 @@ function setCookie(name, value, options) {
 
 /***/ }),
 
+/***/ "./src/browser/stopPropagation.js":
+/*!****************************************!*\
+  !*** ./src/browser/stopPropagation.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.stopPropagation = stopPropagation;
+/**
+ * Calls functions to prevent further propagation
+ * of a given event in the capturing and bubbling phases.
+ *
+ * @memberof module:@linx-impulse/commons-js/browser
+ * @method stopPropagation
+ * @param {object} event The event whose functions will be called
+ */
+function stopPropagation(event) {
+  if (event.preventDefault && typeof event.preventDefault === 'function') {
+    event.preventDefault();
+  }
+
+  if (event.stopPropagation && typeof event.stopPropagation === 'function') {
+    event.stopPropagation();
+  }
+
+  // eslint-disable-next-line no-param-reassign
+  event.cancelBubble = true;
+}
+
+/***/ }),
+
 /***/ "./src/http/ajax.js":
 /*!**************************!*\
   !*** ./src/http/ajax.js ***!
@@ -407,7 +464,7 @@ function serializeParams(params) {
 /**
  * Default ajax request.
  *
- * @memberof module:@linx/commons-js/http
+ * @memberof module:@linx-impulse/commons-js/http
  * @method ajax
  * @param {object} options A set of key/value pairs that configure
  *          the Ajax request.
@@ -423,9 +480,17 @@ function serializeParams(params) {
  *          is successfully finished.
  * @param {function} options.error A function to execute when some error
  *          occurs on request.
+ * @param {number} [options.timeout] Specifies the number of milliseconds before
+ *          the request times out. If the request takes longer than `timeout`,
+ *          the request will be aborted. If not provided the request will wait
+ *          indefinitely.
  */
 function ajax(options) {
   var callback = typeof options.callback === 'function' ? options.callback : function () {};
+
+  var success = typeof options.success === 'function' ? options.success : function () {};
+
+  var error = typeof options.error === 'function' ? options.error : function () {};
 
   var requestData = _typeof(options.data) === 'object' ? options.data : {};
 
@@ -437,40 +502,51 @@ function ajax(options) {
     return;
   }
 
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      var responseData = void 0;
-
-      try {
-        responseData = JSON.parse(xhr.responseText);
-      } catch (e) {
-        responseData = xhr.responseText;
-      }
-
-      if (xhr.status === 200) {
-        var success = typeof options.success === 'function' ? options.success : function () {};
-
-        // success callback execute only when the request have 200
-        // status
-        success(responseData);
-      } else {
-        var error = typeof options.error === 'function' ? options.error : function () {};
-
-        // when a error occurs run the error callback
-        error(responseData);
-      }
-
-      // always execute the callback
-      callback(responseData);
-    }
-  };
-
   var queryParams = serializeParams(params);
   var queryConnector = options.url.indexOf('?') >= 0 ? '&' : '?';
   var url = '' + options.url + queryConnector + queryParams;
 
+  var _options$timeout = options.timeout,
+      timeout = _options$timeout === undefined ? 0 : _options$timeout;
+
+
+  var xhr = new XMLHttpRequest();
   xhr.open(requestMethod, url, true);
+
+  xhr.onload = function (res) {
+    var status = res.target.status;
+
+    var responseData = void 0;
+
+    try {
+      responseData = JSON.parse(xhr.response);
+    } catch (e) {
+      responseData = xhr.response;
+    }
+
+    if (status >= 200 && status < 300) {
+      callback(responseData);
+      success(responseData);
+    } else {
+      callback({ status: status, statusText: xhr.statusText });
+      error({ status: status, statusText: xhr.statusText });
+    }
+  };
+
+  xhr.onerror = function (res) {
+    var status = res.target.status;
+
+
+    callback({ status: status, statusText: xhr.statusText });
+    error({ status: status, statusText: xhr.statusText });
+  };
+
+  xhr.timeout = timeout;
+  xhr.ontimeout = function (err) {
+    callback(err);
+    error(err);
+  };
+
   if (requestMethod !== 'GET') {
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send(serializeParams(requestData));
@@ -501,7 +577,7 @@ var _ajax = __webpack_require__(/*! ./ajax */ "./src/http/ajax.js");
 /**
  * Http module.
  *
- * @module @linx/commons-js/http
+ * @module @linx-impulse/commons-js/http
  */
 exports.ajax = _ajax.ajax; /*
                             * Linx commons-js.
@@ -541,10 +617,18 @@ var _http = __webpack_require__(/*! ./http */ "./src/http/index.js");
 
 var _http2 = _interopRequireDefault(_http);
 
+var _queryString = __webpack_require__(/*! ./query-string */ "./src/query-string/index.js");
+
+var _queryString2 = _interopRequireDefault(_queryString);
+
+var _util = __webpack_require__(/*! ./util */ "./src/util/index.js");
+
+var _util2 = _interopRequireDefault(_util);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * @module @linx/commons-js
+ * @module @linx-impulse/commons-js
  */
 /*
  * Linx commons-js.
@@ -559,10 +643,488 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * of the license agreement you entered into with Linx S.A.
  */
 
-var commons = exports.commons = { browser: _browser2.default, http: _http2.default };
+var commons = exports.commons = { browser: _browser2.default, http: _http2.default, queryString: _queryString2.default, util: _util2.default };
 
 window.top.linx = window.top.linx || {};
 window.top.linx.commons = commons;
+
+/***/ }),
+
+/***/ "./src/query-string/index.js":
+/*!***********************************!*\
+  !*** ./src/query-string/index.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.stringify = exports.parse = undefined;
+
+var _parse = __webpack_require__(/*! ./parse */ "./src/query-string/parse.js");
+
+var _stringify = __webpack_require__(/*! ./stringify */ "./src/query-string/stringify.js");
+
+/**
+ * browser module.
+ *
+ * @module @linx-impulse/commons-js/query-string
+ */
+/*
+ * Linx commons-js.
+ *
+ * A library with common functions implementations for javascript applications.
+ *
+ * Copyright (c) 2018 - Linx S.A
+ *
+ * LICENSE: This software is the confidential and proprietary information of
+ * Linx S.A ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the terms
+ * of the license agreement you entered into with Linx S.A.
+ */
+
+exports.parse = _parse.parse;
+exports.stringify = _stringify.stringify;
+
+/***/ }),
+
+/***/ "./src/query-string/parse.js":
+/*!***********************************!*\
+  !*** ./src/query-string/parse.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.parse = parse;
+function addToObj(parameters, key, value) {
+  var innerObj = parameters;
+  var decodedValue = decodeURIComponent(value);
+  var decodedKey = decodeURIComponent(key);
+
+  if (typeof innerObj[decodedKey] === 'string') {
+    innerObj[decodedKey] = [innerObj[decodedKey], decodedValue];
+  } else if (Array.isArray(innerObj[decodedKey])) {
+    innerObj[decodedKey].push(decodedValue);
+  } else if (decodedKey) {
+    innerObj[decodedKey] = decodedValue;
+  }
+  return innerObj;
+}
+
+/**
+ * Parse a query string and return the object with
+ * the parameters and values
+ *
+ * @memberof module:@linx-impulse/commons-js/query-string
+ * @method parse
+ * @param {string} query The query to be parsed
+ * @returns {object} parameters The object to be returned with the parameters
+ */
+function parse(query) {
+  if (typeof query !== 'string') {
+    return {};
+  }
+
+  var arrayVars = query.split('&');
+
+  return arrayVars.reduce(function (parameters, element) {
+    var _element$split = element.split('='),
+        _element$split2 = _slicedToArray(_element$split, 2),
+        key = _element$split2[0],
+        value = _element$split2[1];
+
+    return addToObj(parameters, key, value);
+  }, {});
+}
+
+/***/ }),
+
+/***/ "./src/query-string/stringify.js":
+/*!***************************************!*\
+  !*** ./src/query-string/stringify.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.stringify = stringify;
+function arrayToQueryParams(key, values) {
+  return values.map(function (val) {
+    return key + '[]=' + encodeURIComponent(val);
+  }).join('&');
+}
+
+/**
+ * From an object with the url parameters concatenate
+ * all in one string
+ *
+ * @memberof module:@linx-impulse/commons-js/query-string
+ * @method stringify
+ * @param {object} params The object to be transformed in string
+ * @returns {string} The object parameters in the url format
+ */
+
+function stringify(params) {
+  return (Object.keys(params) || []).map(function (param) {
+    if (Array.isArray(params[param])) {
+      return arrayToQueryParams(param, params[param]);
+    }if (params[param]) {
+      return param + '=' + encodeURIComponent(params[param]);
+    }
+
+    return null;
+  }).filter(function (token) {
+    return !!token;
+  }).join('&');
+}
+
+/***/ }),
+
+/***/ "./src/util/formatCategories.js":
+/*!**************************************!*\
+  !*** ./src/util/formatCategories.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.formatCategories = formatCategories;
+function getFirstChild(categories, item) {
+  return (categories || []).find(function (category) {
+    return !category.used && Array.isArray(category.parents) && category.parents.indexOf(item.id) !== -1;
+  });
+}
+
+/**
+ * Formats an array of categories passed, sorting them
+ * based on hierarchic structure and returns an array
+ * of category ids.
+ *
+ * @memberof module:@linx-impulse/commons-js/util
+ * @method formatCategories
+ * @param {Array} An array of objects, each consisting of a category
+ * with id, name and an array of parents.
+ * @returns {Array} An array of strings where each string represents
+ * one category id.
+ */
+function formatCategories(categories) {
+  // Filter wrong formatted
+  var filteredCategories = (categories || []).filter(function (category) {
+    return category && category.id;
+  }).map(function (category) {
+    return { id: category.id, parents: category.parents };
+  });
+
+  // Find the root node
+  var item = filteredCategories.find(function (category) {
+    return !category.parents || Array.isArray(category.parents) && !category.parents.length;
+  });
+  var ids = [];
+
+  while ((typeof item === 'undefined' ? 'undefined' : _typeof(item)) === 'object') {
+    ids.push(item.id);
+    item.used = true;
+    item = getFirstChild(filteredCategories, item);
+  }
+  return ids;
+}
+
+/***/ }),
+
+/***/ "./src/util/formatCurrency.js":
+/*!************************************!*\
+  !*** ./src/util/formatCurrency.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.formatCurrency = formatCurrency;
+// Default values
+var DECIMAL_PLACES = 2;
+var THOUSANDS_SEPARATOR = '.';
+var DECIMAL_POINT = ',';
+var CURRENCY_SYMBOL = 'R$';
+
+/**
+ * Formats a number to have specified number of decimal places,
+ * a thousdands separator and decimal point, as well as adding a
+ * currency symbol to the resulting string.
+ *
+ * @memberof module:@linx-impulse/commons-js/util
+ * @method formatCurrency
+ * @param {Number} number A number to be formatted
+ * @param {Object} options Parameters to format the passed number
+ * @param {Number} options.decimalPlaces The number of digits after
+ * the decimal point.
+ * @param {string} options.thousandsSeparator The symbol used to separate
+ * thousands.
+ * @param {string} options.decimalPoint The symbol used to separated
+ * the integer part of the number from the decimal part.
+ * @param {string} options.currencySymbol The symbol of the currency.
+ * Ex: U$, R$, etc.
+ * @returns {string} The resulting formatted string.
+ */
+function formatCurrency(number) {
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref$decimalPlaces = _ref.decimalPlaces,
+      decimalPlaces = _ref$decimalPlaces === undefined ? DECIMAL_PLACES : _ref$decimalPlaces,
+      _ref$thousandsSeparat = _ref.thousandsSeparator,
+      thousandsSeparator = _ref$thousandsSeparat === undefined ? THOUSANDS_SEPARATOR : _ref$thousandsSeparat,
+      _ref$decimalPoint = _ref.decimalPoint,
+      decimalPoint = _ref$decimalPoint === undefined ? DECIMAL_POINT : _ref$decimalPoint,
+      _ref$currencySymbol = _ref.currencySymbol,
+      currencySymbol = _ref$currencySymbol === undefined ? CURRENCY_SYMBOL : _ref$currencySymbol;
+
+  var parts = number.toFixed(decimalPlaces).split('.');
+  var integerPart = parts[0];
+  var decimalPart = Number(parts[1] || 0);
+  var formattedNumber = '';
+
+  decimalPart += Math.pow(10, decimalPlaces);
+  decimalPart = decimalPart.toFixed().substr(1);
+
+  if (thousandsSeparator) {
+    // eslint-disable-next-line no-plusplus
+    for (var i = integerPart.length - 1, j = 0; i > -1; i--, j++) {
+      if (j % 3 === 0 && formattedNumber) {
+        formattedNumber = '' + thousandsSeparator + formattedNumber;
+      }
+
+      formattedNumber = '' + integerPart.charAt(i) + formattedNumber;
+    }
+
+    if (formattedNumber.charAt(0) === thousandsSeparator) {
+      formattedNumber = formattedNumber.substr(1);
+    }
+  } else {
+    formattedNumber = integerPart;
+  }
+
+  formattedNumber += '' + decimalPoint + decimalPart;
+
+  return currencySymbol + ' ' + formattedNumber;
+}
+
+/***/ }),
+
+/***/ "./src/util/index.js":
+/*!***************************!*\
+  !*** ./src/util/index.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.formatCurrency = exports.formatCategories = exports.objectMergeRecursive = exports.loadFile = undefined;
+
+var _loadFile = __webpack_require__(/*! ./loadFile */ "./src/util/loadFile.js");
+
+var _objectMergeRecursive = __webpack_require__(/*! ./objectMergeRecursive */ "./src/util/objectMergeRecursive.js");
+
+var _formatCategories = __webpack_require__(/*! ./formatCategories */ "./src/util/formatCategories.js");
+
+var _formatCurrency = __webpack_require__(/*! ./formatCurrency */ "./src/util/formatCurrency.js");
+
+/**
+ * browser module.
+ *
+ * @module @linx-impulse/commons-js/util
+ */
+/*
+ * Linx commons-js.
+ *
+ * A library with common functions implementations for javascript applications.
+ *
+ * Copyright (c) 2018 - Linx S.A
+ *
+ * LICENSE: This software is the confidential and proprietary information of
+ * Linx S.A ("Confidential Information"). You shall not disclose such
+ * Confidential Information and shall use it only in accordance with the terms
+ * of the license agreement you entered into with Linx S.A.
+ */
+
+exports.loadFile = _loadFile.loadFile;
+exports.objectMergeRecursive = _objectMergeRecursive.objectMergeRecursive;
+exports.formatCategories = _formatCategories.formatCategories;
+exports.formatCurrency = _formatCurrency.formatCurrency;
+
+/***/ }),
+
+/***/ "./src/util/loadFile.js":
+/*!******************************!*\
+  !*** ./src/util/loadFile.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.loadFile = loadFile;
+/**
+ * Creates and appends an element that links the HTML document to a given file
+ * source and sets a callback function to be called once the element finishes
+ * loading.
+ *
+ * @memberof module:@linx-impulse/commons-js/util
+ * @method loadFile
+ * @param {string} source The path to the file that will be loaded.
+ * @param {function} callback The function to be called once the
+ * element created finishes loading.
+ * @param {object} document The document object to be used,
+ * defaults to Window.document.
+ * @returns {object} The element that was created and appended.
+ */
+function loadFile(source, callback) {
+  var document = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : window.document;
+
+  var file = void 0;
+
+  if (source.indexOf('.js') !== -1) {
+    file = document.createElement('script');
+    file.setAttribute('type', 'text/javascript');
+    file.setAttribute('async', 'true');
+    file.setAttribute('src', source);
+  } else if (source.indexOf('.css') !== -1) {
+    file = document.createElement('link');
+    file.setAttribute('type', 'text/css');
+    file.setAttribute('rel', 'stylesheet');
+    file.setAttribute('href', source);
+  }
+
+  // Append in the HEAD element
+  if (file) {
+    var _document$getElements = document.getElementsByTagName('head'),
+        _document$getElements2 = _slicedToArray(_document$getElements, 1),
+        head = _document$getElements2[0];
+
+    head.appendChild(file);
+
+    if (file.readyState) {
+      file.onreadystatechange = function () {
+        if (file.readyState === 'loaded' || file.readyState === 'complete') {
+          file.onreadystatechange = null;
+
+          if (typeof callback === 'function') {
+            callback();
+          }
+        }
+      };
+    } else {
+      file.onload = function () {
+        file.onload = null;
+
+        if (typeof callback === 'function') {
+          callback();
+        }
+      };
+    }
+  }
+
+  return file;
+}
+
+/***/ }),
+
+/***/ "./src/util/objectMergeRecursive.js":
+/*!******************************************!*\
+  !*** ./src/util/objectMergeRecursive.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.objectMergeRecursive = objectMergeRecursive;
+/**
+ * Merges two or more objects, combining common properties. Overwrites
+ * the properties from right to left in case of conflicts and ignores parameters
+ * (but not properties) that are not objects.
+ *
+ * @memberof module:@linx-impulse/commons-js/util
+ * @method objectMergeRecursive
+ * @param {...object} source An object to be merged
+ * @returns {object} An object containing merged properties of all valid sources
+ * given.
+ */
+function objectMergeRecursive() {
+  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  var target = args[0] && _typeof(args[0]) === 'object' && !Array.isArray(args[0]) ? args[0] : {};
+
+  // eslint-disable-next-line no-plusplus
+
+  var _loop = function _loop(i) {
+    var source = args[i] && _typeof(args[i]) === 'object' && !Array.isArray(args[i]) ? args[i] : {};
+
+    // eslint-disable-next-line no-loop-func
+    Object.keys(source).forEach(function (key) {
+      if (_typeof(target[key]) === 'object' && !Array.isArray(target[key]) && _typeof(source[key]) === 'object' && !Array.isArray(source[key])) {
+        target[key] = objectMergeRecursive(target[key], source[key]);
+      } else if (source[key] !== undefined) {
+        target[key] = source[key];
+      }
+    });
+  };
+
+  for (var i = 1; i < args.length; i++) {
+    _loop(i);
+  }
+
+  return target;
+}
 
 /***/ }),
 
