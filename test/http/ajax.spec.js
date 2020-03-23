@@ -4,16 +4,20 @@ import { ajax } from '../../src/http/ajax';
 
 describe('http.ajax', function () {
   let fakeXhr;
+  let sandbox;
 
   beforeEach(function () {
     fakeXhr = sinon.useFakeXMLHttpRequest();
     fakeXhr.onCreate = (xhr) => {
       this.request = xhr;
     };
+
+    sandbox = sinon.createSandbox();
   });
 
   afterEach(function () {
     fakeXhr.restore();
+    sandbox.restore();
   });
 
   it('should return a promise that resolves when successful', function () {
@@ -26,26 +30,30 @@ describe('http.ajax', function () {
     expect(response).to.eventually.equal(expectedResponse);
   });
 
-  it('should run the callback option on successful responses', function (done) {
+  it('should run the callback option on successful responses', function () {
+    const callbackStub = sandbox.stub();
+
     ajax({
       url: 'http://www.google.com',
-      callback: () => {
-        done();
-      },
+      callback: callbackStub,
     });
 
     this.request.respond(200, {}, 'OK');
+
+    expect(callbackStub).to.have.been.calledOnce;
   });
 
-  it('should run the callback option on error responses', function (done) {
+  it('should run the callback option on error responses', function () {
+    const callbackStub = sandbox.stub();
+
     ajax({
       url: 'http://www.google.com',
-      callback: () => {
-        done();
-      },
+      callback: callbackStub,
     });
 
     this.request.error();
+
+    expect(callbackStub).to.have.been.calledOnce;
   });
 
   it('should run the callback option when request times out', function () {
@@ -63,57 +71,62 @@ describe('http.ajax', function () {
     expect(callbackStub).to.have.been.calledOnce;
   });
 
-  it('should run the success option on successful responses', function (done) {
+  it('should run the success option on successful responses', function () {
+    const successStub = sinon.stub();
+
     ajax({
       url: 'http://www.google.com',
-      success: () => {
-        done();
-      },
+      success: successStub,
     });
 
     this.request.respond(200, {}, 'OK');
+
+    expect(successStub).to.have.been.calledOnce;
   });
 
-  it('should pass response data to success callback', function (done) {
+  it('should pass response data to success callback', function () {
+    const successStub = sinon.stub();
+
     const responseData = 'ok';
 
     ajax({
       url: 'http://www.google.com',
-      success: (data) => {
-        expect(data).to.be.equal(responseData);
-        done();
-      },
+      success: successStub,
     });
 
     this.request.respond(200, {}, responseData);
+
+    expect(successStub).to.have.been.calledOnce;
+    expect(successStub).to.have.been.calledWith(responseData);
   });
 
-  it('should parse response data if its a json', function (done) {
+  it('should parse response data if its a json', function () {
+    const successStub = sinon.stub();
+
     const responseData = { data: 'ok' };
 
     ajax({
       url: 'http://www.google.com',
-      success: (data) => {
-        expect(data).to.deep.equal(responseData);
-        done();
-      },
+      success: successStub,
     });
 
     this.request.respond(200, {}, JSON.stringify(responseData));
+
+    expect(successStub).to.have.been.calledOnce;
+    expect(successStub).to.have.been.calledWith(responseData);
   });
 
-  it('should not run the success option on error responses', function (done) {
+  it('should not run the success option on error responses', function () {
+    const successStub = sinon.stub();
+
     ajax({
       url: 'http://www.google.com',
-      success: () => {
-        done.fail();
-      },
-      error: () => {
-        done();
-      },
+      success: successStub,
     });
 
     this.request.error();
+
+    expect(successStub).to.not.have.been.called;
   });
 
   it('should return a promise that rejects when request times out', function () {
@@ -152,15 +165,17 @@ describe('http.ajax', function () {
     expect(response).to.be.rejected;
   });
 
-  it('should run the error option on error responses', function (done) {
+  it('should run the error option on error responses', function () {
+    const errorStub = sandbox.stub();
+
     ajax({
       url: 'http://www.google.com',
-      error: () => {
-        done();
-      },
+      error: errorStub,
     });
 
     this.request.error();
+
+    expect(errorStub).to.have.been.calledOnce;
   });
 
   it('should return a promise that rejects if response status is higher than 300', function () {
@@ -201,22 +216,18 @@ describe('http.ajax', function () {
     expect(errorStub).to.have.been.calledOnce;
   });
 
-  it(
-    'should not run the error option on successful responses',
-    function (done) {
-      ajax({
-        url: 'http://www.google.com',
-        success: () => {
-          done();
-        },
-        error: () => {
-          done.fail();
-        },
-      });
+  it('should not run the error option on successful responses', function () {
+    const errorStub = sandbox.stub();
 
-      this.request.respond(200, {}, 'OK');
-    },
-  );
+    ajax({
+      url: 'http://www.google.com',
+      error: errorStub,
+    });
+
+    this.request.respond(200, {}, 'OK');
+
+    expect(errorStub).to.not.have.been.called;
+  });
 
   it('should pass params options on query', function (done) {
     const baseUrl = 'http://www.google.com';
