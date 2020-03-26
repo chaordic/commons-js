@@ -83,55 +83,73 @@ export function ajax(options) {
     )
   ) ? 'GET' : options.type.toUpperCase();
 
-  if (typeof options.url !== 'string' && options.url === '') {
-    return;
-  }
+  const CPromise = window.Promise || function CPromise(executor) {
+    if (typeof executor === 'function') {
+      executor(
+        // resolve
+        () => {},
+        // reject
+        () => {},
+      );
+    }
+  };
 
-  const queryParams = serializeParams(params);
-  const queryConnector = options.url.indexOf('?') >= 0 ? '&' : '?';
-  const url = `${options.url}${queryConnector}${queryParams}`;
-
-  const { timeout = 0 } = options;
-
-  const xhr = new XMLHttpRequest();
-  xhr.open(requestMethod, url, true);
-
-  xhr.onload = (res) => {
-    const { status } = res.target;
-    let responseData;
-
-    try {
-      responseData = JSON.parse(xhr.response);
-    } catch (e) {
-      responseData = xhr.response;
+  return new CPromise((resolve, reject) => {
+    if (typeof options.url !== 'string' && options.url === '') {
+      resolve();
     }
 
-    if (status >= 200 && status < 300) {
-      callback(responseData);
-      success(responseData);
-    } else {
+    const queryParams = serializeParams(params);
+    const queryConnector = options.url.indexOf('?') >= 0 ? '&' : '?';
+    const url = `${options.url}${queryConnector}${queryParams}`;
+
+    const { timeout = 0 } = options;
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.open(requestMethod, url, true);
+
+    xhr.onload = (res) => {
+      const { status } = res.target;
+      let responseData;
+
+      try {
+        responseData = JSON.parse(xhr.response);
+      } catch (e) {
+        responseData = xhr.response;
+      }
+
+      if (status >= 200 && status < 300) {
+        callback(responseData);
+        success(responseData);
+        resolve(responseData);
+      } else {
+        callback({ status, statusText: xhr.statusText });
+        error({ status, statusText: xhr.statusText });
+        reject(new Error({ status, statusText: xhr.statusText }));
+      }
+    };
+
+    xhr.onerror = (res) => {
+      const { status } = res.target;
+
       callback({ status, statusText: xhr.statusText });
       error({ status, statusText: xhr.statusText });
+      reject(new Error({ status, statusText: xhr.statusText }));
+    };
+
+    xhr.timeout = timeout;
+    xhr.ontimeout = (err) => {
+      callback(err);
+      error(err);
+      reject(err);
+    };
+
+    if (requestMethod !== 'GET') {
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send(serializeParams(requestData));
+    } else {
+      xhr.send();
     }
-  };
-
-  xhr.onerror = (res) => {
-    const { status } = res.target;
-
-    callback({ status, statusText: xhr.statusText });
-    error({ status, statusText: xhr.statusText });
-  };
-
-  xhr.timeout = timeout;
-  xhr.ontimeout = (err) => {
-    callback(err);
-    error(err);
-  };
-
-  if (requestMethod !== 'GET') {
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.send(serializeParams(requestData));
-  } else {
-    xhr.send();
-  }
+  });
 }
