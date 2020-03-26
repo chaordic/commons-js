@@ -16,6 +16,16 @@ describe('http.ajax', function () {
     fakeXhr.restore();
   });
 
+  it('should return a promise that resolves when successful', function () {
+    const expectedResponse = { ok: true };
+
+    const response = ajax({ url: 'http://www.google.com' });
+
+    this.request.respond(200, expectedResponse, 'OK');
+
+    expect(response).to.eventually.equal(expectedResponse);
+  });
+
   it('should run the callback option on successful responses', function (done) {
     ajax({
       url: 'http://www.google.com',
@@ -106,6 +116,19 @@ describe('http.ajax', function () {
     this.request.error();
   });
 
+  it('should return a promise that rejects when request times out', function () {
+    const clock = sinon.useFakeTimers();
+
+    const response = ajax({
+      url: 'http://www.google.com',
+      timeout: 500,
+    });
+
+    clock.tick(501);
+
+    expect(response).to.be.rejected;
+  });
+
   it('should not run the success option when request times out', function () {
     const clock = sinon.useFakeTimers();
     const successStub = sinon.stub();
@@ -121,6 +144,14 @@ describe('http.ajax', function () {
     expect(successStub).to.not.have.been.called;
   });
 
+  it('should return a promise that rejects when an error is returned', function () {
+    const response = ajax({ url: 'http://www.google.com' });
+
+    this.request.error();
+
+    expect(response).to.be.rejected;
+  });
+
   it('should run the error option on error responses', function (done) {
     ajax({
       url: 'http://www.google.com',
@@ -130,6 +161,29 @@ describe('http.ajax', function () {
     });
 
     this.request.error();
+  });
+
+  it('should return a promise that rejects if response status is higher than 300', function () {
+    const response = ajax({
+      url: 'http://www.google.com',
+    });
+
+    this.request.respond(301);
+
+    expect(response).to.be.rejected;
+  });
+
+  it('should run the error option when response status is higher than 300', function () {
+    const errorStub = sinon.stub();
+
+    ajax({
+      url: 'http://www.google.com',
+      error: errorStub,
+    });
+
+    this.request.respond(301);
+
+    expect(errorStub).to.have.been.calledOnce;
   });
 
   it('should run the error option when request times out', function () {
