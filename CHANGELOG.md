@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.3.0"></a>
+# [4.3.0](https://github.com/chaordic/commons-js/compare/v4.2.1...v4.3.0) (2020-03-26)
+
+
+### Features
+
+* promisify ajax response ([18f8d04](https://github.com/chaordic/commons-js/commit/18f8d04))
+
+
+
 <a name="4.2.1"></a>
 ## [4.2.1](https://github.com/chaordic/commons-js/compare/v4.2.0...v4.2.1) (2020-02-05)
 
