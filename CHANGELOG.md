@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.3.1"></a>
+## [4.3.1](https://github.com/chaordic/commons-js/compare/v4.3.0...v4.3.1) (2020-06-19)
+
+
+### Bug Fixes
+
+* removing the Error class within ajax flow ([891f4af](https://github.com/chaordic/commons-js/commit/891f4af))
+
+
+
 <a name="4.3.0"></a>
 # [4.3.0](https://github.com/chaordic/commons-js/compare/v4.2.1...v4.3.0) (2020-03-26)
 
