@@ -126,7 +126,7 @@ export function ajax(options) {
       } else {
         callback({ status, statusText: xhr.statusText });
         error({ status, statusText: xhr.statusText });
-        reject(new Error({ status, statusText: xhr.statusText }));
+        reject({ status, statusText: xhr.statusText });
       }
     };
 
@@ -135,7 +135,7 @@ export function ajax(options) {
 
       callback({ status, statusText: xhr.statusText });
       error({ status, statusText: xhr.statusText });
-      reject(new Error({ status, statusText: xhr.statusText }));
+      reject({ status, statusText: xhr.statusText });
     };
 
     xhr.timeout = timeout;
