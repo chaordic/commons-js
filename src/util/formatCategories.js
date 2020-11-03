@@ -19,25 +19,41 @@ function getFirstChild(categories, item) {
  * one category id.
  */
 export function formatCategories(categories) {
+  // check if categories is an array of strings
+  if (categories.every(category => typeof category === 'string')) {
+    return [categories.join('_')];
+  }
+
   // Filter wrong formatted
   const filteredCategories = (categories || [])
     .filter(category => category && category.id)
-    .map(category => ({ id: category.id, parents: category.parents }));
+    .map(category => ({
+      id: category.id,
+      parents: category.parents,
+    }));
 
-  // Find the root node
-  let item = filteredCategories.find(category => (
+  // Filter the root nodes
+  const roots = filteredCategories.filter(category => (
     (
       !category.parents || (
         Array.isArray(category.parents) && !category.parents.length
       )
     )
   ));
-  const ids = [];
 
-  while (typeof item === 'object') {
-    ids.push(item.id);
-    item.used = true;
-    item = getFirstChild(filteredCategories, item);
-  }
-  return ids;
+  // For each root generate an array of categories
+  const result = roots.map((root) => {
+    let item = root;
+    const ids = [];
+
+    while (typeof item === 'object') {
+      ids.push(item.id);
+      item.used = true;
+      item = getFirstChild(categories, item);
+    }
+
+    return ids.join('_');
+  });
+
+  return result;
 }
