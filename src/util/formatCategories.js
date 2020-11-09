@@ -1,9 +1,20 @@
-function getFirstChild(categories, item) {
-  return (categories || []).find(category => (
-    !category.used
-    && Array.isArray(category.parents)
+function getChildren(categories, item) {
+  return (categories || []).filter(category => (
+    Array.isArray(category.parents)
     && category.parents.indexOf(item.id) !== -1
   ));
+}
+
+function flatten(categories, root, result, acc = '') {
+  const children = getChildren(categories, root);
+
+  if (!children.length) {
+    result.push(acc);
+  }
+
+  children.forEach((child) => {
+    flatten(categories, child, result, `${acc}_${child.id}`);
+  });
 }
 
 /**
@@ -42,17 +53,9 @@ export function formatCategories(categories) {
   ));
 
   // For each root generate an array of categories
-  const result = roots.map((root) => {
-    let item = root;
-    const ids = [];
-
-    while (typeof item === 'object') {
-      ids.push(item.id);
-      item.used = true;
-      item = getFirstChild(categories, item);
-    }
-
-    return ids.join('_');
+  const result = [];
+  roots.forEach((root) => {
+    flatten(categories, root, result, root.id);
   });
 
   return result;

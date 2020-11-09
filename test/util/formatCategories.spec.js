@@ -36,7 +36,7 @@ describe('util/formatCategories', function() {
     ];
 
     const result = formatCategories(mockCategories);
-    expect(result).to.deep.equal(['cat-02_cat-01']);
+    expect(result).to.deep.equal(['cat-02_cat-01', 'cat-02_cat-03']);
   });
 
   it('should one string for each parent tree', function() {
@@ -50,7 +50,7 @@ describe('util/formatCategories', function() {
     ];
 
     const result = formatCategories(mockCategories);
-    expect(result).to.deep.equal(['cat-01_cat-02_cat-03', 'cat-04_cat-05_cat-06']);
+    expect(result).to.deep.equal(['cat-01_cat-02_cat-03', 'cat-04_cat-02_cat-03', 'cat-04_cat-05_cat-06']);
   });
 
   it('should return one string for each category without parents', function() {
