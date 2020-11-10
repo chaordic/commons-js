@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.4.0"></a>
+# [4.4.0](https://github.com/chaordic/commons-js/compare/v4.3.1...v4.4.0) (2020-11-10)
+
+
+### Bug Fixes
+
+* return all paths on the parent tree ([1f78d00](https://github.com/chaordic/commons-js/commit/1f78d00))
+
+
+### Features
+
+* formatCategories accept string array ([a7c0b9f](https://github.com/chaordic/commons-js/commit/a7c0b9f))
+
+
+
 <a name="4.3.1"></a>
 ## [4.3.1](https://github.com/chaordic/commons-js/compare/v4.3.0...v4.3.1) (2020-06-19)
 
