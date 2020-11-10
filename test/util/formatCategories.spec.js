@@ -2,13 +2,20 @@ import { expect, sinon } from '../globals';
 import { formatCategories } from '../../src/util/formatCategories';
 
 describe('util/formatCategories', function() {
-  it('should return an array of category ids', function() {
+  it('should return an array of category trees', function() {
     const mockCategories = [
       { id: 'cat-01', name: 'category-01' },
     ];
 
     const result = formatCategories(mockCategories);
     expect(result).to.deep.equal(['cat-01']);
+  });
+
+  it('should return an array with a single string when categories is an array of strings', function () {
+    const mockCategories = ['category-01', 'category-02', 'category-03'];
+
+    const result = formatCategories(mockCategories);
+    expect(result).to.deep.equal(['category-01_category-02_category-03']);
   });
 
   it('should sort categories with parents first', function() {
@@ -18,7 +25,7 @@ describe('util/formatCategories', function() {
     ];
 
     const result = formatCategories(mockCategories);
-    expect(result).to.deep.equal(['cat-02', 'cat-01']);
+    expect(result).to.deep.equal(['cat-02_cat-01']);
   });
 
   it('should remove children outside of first parent tree', function() {
@@ -29,10 +36,10 @@ describe('util/formatCategories', function() {
     ];
 
     const result = formatCategories(mockCategories);
-    expect(result).to.deep.equal(['cat-02', 'cat-01']);
+    expect(result).to.deep.equal(['cat-02_cat-01', 'cat-02_cat-03']);
   });
 
-  it('should remove parents outside of first parent tree', function() {
+  it('should one string for each parent tree', function() {
     const mockCategories = [
       { id: 'cat-01', name: 'category-01' },
       { id: 'cat-02', name: 'category-02', parents: ['cat-01', 'cat-04'] },
@@ -43,10 +50,10 @@ describe('util/formatCategories', function() {
     ];
 
     const result = formatCategories(mockCategories);
-    expect(result).to.deep.equal(['cat-01', 'cat-02', 'cat-03']);
+    expect(result).to.deep.equal(['cat-01_cat-02_cat-03', 'cat-04_cat-02_cat-03', 'cat-04_cat-05_cat-06']);
   });
 
-  it('should remove unrelated categories outside of first parent tree', function() {
+  it('should return one string for each category without parents', function() {
     const mockCategories = [
       { id: 'cat-01', name: 'category-01' },
       { id: 'cat-02', name: 'category-02', parents: ['cat-01'] },
@@ -57,7 +64,7 @@ describe('util/formatCategories', function() {
     ];
 
     const result = formatCategories(mockCategories);
-    expect(result).to.deep.equal(['cat-01', 'cat-02']);
+    expect(result).to.deep.equal(['cat-01_cat-02', 'cat-03', 'cat-04', 'cat-05', 'cat-06']);
   });
 
   it('should remove all cycles found in the parent tree', function() {
