@@ -1,6 +1,6 @@
 {
   "name": "@linx-impulse/commons-js",
-  "version": "4.4.0",
+  "version": "4.4.1",
   "description": "A library with common function implementations for Javascript Applications.",
   "main": "src/index.js",
   "browser": {
